@@ -1,12 +1,19 @@
 # nginx
 ## Nội dung bài viết.
 - [I. NGINX là gì? NGINX hoạt động ntn?](#1)
-- [II. Cách cài đặt NGINX cho ubuntu.](#2)
+- [1. Sự ra đời của NGINX.](#2)
+- [2. NGINX là gì?](#3)
+- [3. Vậy thì NGINX hoạt động ntn?](#4)
+- [II. Cách cài đặt NGINX cho ubuntu.](#5)
+- [1. Đầu tiên, tiến hành update các gói trong hệ thống và cài đặt NGINX:](#6)
+- [2. Bước tiếp theo cấu hình tường lửa.](#7)
+- [3. Bước 3: Kiểm tra trang web.](#8)
+
 
 ## I.NGINX là gì? NGINX hoạt động ntn?<a name="1"></a>
-## 1.Sự ra đời của NGINX.
+## 1.Sự ra đời của NGINX.<a name="2"></a>
 NGINX chính thức ra đời vào tháng 10/2014. Đây là phần mềm giúp server có tốc độ và khả năng mở rộng lớn nhất, đồng thời, xử lý và thao tác trên hàng nghìn kết nối cùng lúc. Do đó, rất nhiều “ông lớn” công nghệ hiện nay đều lựa chọn NGINX như Google, Adobe, Netflix, WordPress…
-## 2.NGINX là gì?
+## 2.NGINX là gì?<a name="3"></a>
 NGINX là một phần mềm web server mã nguồn mở, sử dụng kiến trúc hướng sự kiện (event-driven) không đồng bộ (asynchronous). Mục tiêu ban đầu để phục vụ HTTP cache nhưng sau được áp dụng vào reverse proxy, HTTP load balancer và các giao thức truyền mail như IMAP4, POP3, và SMTP.
 Vậy chúng ta có thêm 1 vài khái niệm mới như POP3,SMTP,IMAP mình sẽ nói qua 1 chút về nó nhé 
 Đầu tiên là POP3:
@@ -34,14 +41,14 @@ SMTP ports:
 
 Port 25 – port không mã hóa
 Port 465 – SSL/TLS port, cũng có thể được gọi là SMTPS
-## 3.Vậy thì NGINX hoạt động ntn?
+## 3.Vậy thì NGINX hoạt động ntn?<a name="4"></a>
 Về cơ bản, NGINX cũng hoạt động tương tự như các web server khác. Khi bạn mở một trang web, trình duyệt của bạn sẽ liên hệ với server chứa website đó. Server sẽ tìm kiếm đúng file yêu cầu của website và gửi về cho bạn. Đây là một trình tự xử lý dữ liệu single – thread, nghĩa là các bước được thực hiện theo một trình tự duy nhất. Mỗi yêu cầu sẽ được tạo một thread riêng.
 
 Tuy nhiên, NGINX hoạt động theo kiến trúc bất đồng bộ (asynchronous) hướng sự kiện (event driven). Nó cho phép các threads tương đồng được quản lý trong một tiến process. Mỗi process hoạt động sẽ bao gồm các thực thể nhỏ hơn, gọi là worker connections dùng để xử lý tất cả threads.
 
 Worker connections sẽ gửi các yêu cầu cho worker process, worker process sẽ gửi nó tới master process, và master process sẽ trả lời các yêu cầu đó. Đó là lý do vì sao một worker connection có thể xử lý đến 1024 yêu cầu tương tự nhau. Nhờ vậy, NGINX có thể xử lý hàng ngàn yêu cầu khác nhau cùng một lúc.
-# II.Cách cài đặt NGINX cho ubuntu.<a name="2"></a>
-## 1.Đầu tiên, tiến hành update các gói trong hệ thống :
+# II.Cách cài đặt NGINX cho ubuntu.<a name="5"></a>
+## 1.Đầu tiên, tiến hành update các gói trong hệ thống và cài đặt NGINX:<a name="6"></a>
 ```
 sudo apt install -y update
 ```
@@ -83,7 +90,7 @@ systemctl status nginx
 Thg 4 27 09:34:14 Ubuntulab systemd[1]: Starting A high performance web server and a reverse proxy server...
 Thg 4 27 09:34:14 Ubuntulab systemd[1]: Started A high performance web server and a reverse proxy server.
 ```
-## 2.Bước tiếp theo cấu hình tường lửa.
+## 2.Bước tiếp theo cấu hình tường lửa.<a name="7"></a>
 Sử dụng ufw để biết cách sử dụng cấu hình tường lửa cho Nginx :
 ```
 sudo ufw app list 
@@ -107,7 +114,7 @@ Sau đó kiểm tra lại thay đổi với lệnh sau:
 ```
 sudo ufw status
 ```
-## 3.Bước 3: Kiểm tra trang web.
+## 3.Bước 3: Kiểm tra trang web.<a name="8"></a>
 Để kiểm tra trang web, ta mở trình duyệt và nhập vào địa chỉ ip của máy chủ Nginx.
 ```
 http://IP_address 
